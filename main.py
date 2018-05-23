@@ -7,7 +7,7 @@ from sklearn.metrics import accuracy_score
 
 def thumbnelify_dataset():
     def thumbneilify(dir, file_name):
-        size = 101, 150
+        size = 32, 32
         thumb_file = "thumb/" + file_name[:-4]
         outfile =  thumb_file + ".thumbnail.jpg"
         if thumb_file != outfile:
@@ -37,6 +37,7 @@ def to_numpy_array(image):
     return np.append(np.append(r_vec, g_vec), b_vec)
 
 thumbnelify_dataset()
+exit()
 
 X = []
 Y = []

@@ -1,4 +1,6 @@
 using Knet, Images
+include(Knet.dir("data","mnist.jl"))
+
 
 function get_training_data()
     X = []
@@ -58,16 +60,18 @@ end
 
 
 function main()
-    X, Y = get_training_data()
-    global dtrn = minibatch(X, Y, 5; xtype=Array)
-    global dtst = minibatch(X, Y, 5; xtype=Array)
+    #X, Y = get_training_data()
+    xtrn,ytrn,xtst,ytst = mnist()
+    global dtrn = minibatch(xtrn, ytrn, 128; xtype=Array)
+    global dtst = minibatch(xtst, ytst, 128; xtype=Array)
 
     w = weights()
-    report(epoch)=println((:epoch,epoch,:trn,accuracy(w,dtrn,predict),:tst,accuracy(w,dtst,predict)))
+    #report(epoch)=println((:epoch,epoch,:trn,accuracy(w,dtrn,predict),:tst,accuracy(w,dtst,predict)))
 
-    report(0)
+    #report(0)
     for epoch=1:5
+        print("Training !")
         train(w, dtrn)
-        report(epoch)
+        #report(epoch)
     end
 end
